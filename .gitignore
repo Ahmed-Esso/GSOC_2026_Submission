@@ -1,0 +1,23 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Local environments
+.env/
+.venv/
+ENV/
+venv/
+
+# VS Code settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Keep model weights tracked
+!Common_Test_1/model_weights_test_1.pth
+!Specific_Test_5/model_weights_test_5.pth

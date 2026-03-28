@@ -1,57 +1,58 @@
-# DeepLense GSoC 2026 Evaluation Tests
+# GSOC 2026 Submission
 
-This repository contains the required implementation for the DeepLense prospective student evaluation. It includes a multi-class classification model and a binary lens detection pipeline.
+This repository contains the code, models, and documentation for the GSOC 2026 submission. It includes two main test pipelines for lens classification and lens finding, along with all required model weights and evaluation artifacts.
 
-## Project 1. Multi-Class Classification (Common Test I)
+## Project Overview
 
-### Strategy
-The model classifies images into three categories: no substructure, subhalo substructure, and vortex substructure. I used a ResNet18 architecture tailored for the normalized input images. The strategy involves transfer learning with a custom head to map features to the three target classes.
+This project demonstrates deep learning pipelines for astronomical lens detection and classification. It is structured for easy review and reproducibility, with all artifacts and outputs included. The repository is intended for evaluation as part of the GSOC 2026 process.
 
-### Implementation Details
-* **Data Split:** 90% training and 10% validation.
-* **Preprocessing:** Min-max normalization and random horizontal/vertical flips.
-* **Optimization:** Adam optimizer with Cross-Entropy Loss.
+## Repository Structure
 
-### Metrics
-* Multi-class ROC curves generated for each class.
-* AUC scores calculated using a One-vs-Rest (OvR) approach.
+| Path                                 | Description                                                                                 |
+|--------------------------------------|---------------------------------------------------------------------------------------------|
+| README.md                            | Project overview, setup, and artifact documentation (this file)                             |
+| .gitignore                           | Excludes local cache, checkpoints, and environment clutter                                  |
+| Common_Test_1/                       | Lens classification pipeline, model weights, and evaluation outputs                         |
+| ├── DeepLense_Classification.ipynb   | Jupyter notebook for lens classification                                                    |
+| ├── model_weights_test_1.pth         | Trained model weights for classification pipeline                                           |
+| └── README.md                        | Documentation for Common_Test_1 artifacts                                                   |
+| Specific_Test_5/                     | Lens finding pipeline, model weights, and evaluation outputs                                |
+| ├── lens_finding_pipeline.ipynb      | Jupyter notebook for lens finding                                                           |
+| ├── model_weights_test_5.pth         | Trained model weights for finding pipeline                                                  |
+| └── README.md                        | Documentation for Specific_Test_5 artifacts                                                 |
 
----
+## Setup & Usage
 
-## Project 2. Lens Finding & Data Pipelines (Specific Test V)
+### Requirements
+- Python 3.8+
+- Jupyter or Colab
+- PyTorch, NumPy, Matplotlib, scikit-learn (see notebooks for details)
 
-### Strategy
-This task addresses the identification of strong lenses versus non-lensed galaxies using three-filter (3, 64, 64) observational data. The primary challenge is the significant class imbalance, as non-lenses outnumber lenses.
+### Running in Colab
+1. Upload the repository to your Colab environment.
+2. Open either notebook and run all cells. Model weights are included and will be loaded automatically.
 
-### Implementation Details
-* **Data Pipeline:** A custom PyTorch Dataset class loads the multi-filter arrays.
-* **Imbalance Handling:** I implemented weighted random sampling in the DataLoader and applied class weights to the loss function. This ensures the model does not bias toward the majority non-lens class.
-* **Architecture:** A lightweight CNN designed to process 3-channel input without losing spatial information.
+### Running Locally
+1. Clone the repository:
+	```sh
+	git clone https://github.com/<your-username>/GSOC_2026_Submission.git
+	cd GSOC_2026_Submission
+	```
+2. Install dependencies (see notebook headers for details).
+3. Launch Jupyter:
+	```sh
+	jupyter notebook
+	```
+4. Open and run the desired notebook.
 
-### Metrics
-* Binary ROC curve to visualize true positive vs. false positive trade-offs.
-* Final AUC score to quantify model discriminative power.
+## Datasets
+- Notebooks expect test datasets in standard formats (see notebook headers for details).
+- Datasets are not included due to size/licensing. Please follow notebook instructions to obtain or simulate test data.
 
----
+## Outputs & Artifacts
+- Each pipeline produces a confusion matrix, ROC curve, and training curves (see folder READMEs).
+- Model weights (`.pth` files) are included for reproducibility.
 
-## Execution Instructions
-
-1.  Open the desired `.ipynb` file in Google Colab.
-2.  Mount Google Drive to access the datasets.
-3.  Run all cells to execute the training and evaluation pipeline.
-4.  Evaluation plots and metrics appear at the end of each notebook.
-
----
-
-## GitHub Commands for Deployment
-
-Run these commands to push your work to a dedicated branch. Replace `GSOC_2026_Submission` with your preferred branch name.
-
-```bash
-git checkout -b GSOC_2026_Submission
-git add .
-git commit -m "Complete evaluation tests for Common I and Specific V"
-git push origin GSOC_2026_Submission
-```
-
-**Note: No Pull Requests (PRs) should be created.**
+## Notes
+- All files and outputs are documented in their respective folder README files.
+- For questions, see notebook headers or contact the author.
